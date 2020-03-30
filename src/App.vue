@@ -23,3 +23,10 @@
         }
     }
 </script>
+
+<style scoped>
+    hr{
+        color: aliceblue;
+       margin:30px;
+    }
+</style>

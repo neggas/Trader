@@ -16,7 +16,7 @@
     }
 </script>
 
-<style scope>
+<style scoped>
     *{
         padding:0;
         margin:0;
@@ -25,7 +25,6 @@
     .wrapper{
         width:80%;
         margin:30px auto;
-        border:1px solid #ccc;
         height:300px;
         display:flex;
         flex-wrap:wrap;

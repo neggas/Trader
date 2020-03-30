@@ -5,13 +5,13 @@
         </div>
         <div class='submit-div'>
             <input type="number">
-            <button>Buy</button>
+            <button>Sell</button>
         </div>
     </div>
 </template>
 
-<style scoped>
-     *{
+<style scope scoped>
+    *{
         padding:0;
         margin:0;
         box-sizing:border-box;
@@ -30,7 +30,7 @@
 
     .stock .title{
         display:flex;
-        background-color:#3e3e7e;
+        background-color:#0e2405;
         width:418px;
         position:relative;
         right:5px; 
@@ -53,7 +53,7 @@
         position: relative;
         left:100px;
         border:1px solid black;
-        background-color: #3e3e7e;
+        background-color: #0e2405;;
         color:white;
         padding:5px;
         padding-left:10px;
