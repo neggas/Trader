@@ -1,17 +1,26 @@
 <template>
     <div id="home">
         <div class="wrapper">
-            <Stock></Stock>
-            <Stock></Stock>
-            <Stock></Stock>
-            <Stock></Stock>
+            <Stock v-for="article in articles" :key="article.name" :article="article"></Stock>
         </div>
     </div>
 </template>
 
 <script>
     import Stock from "./Stock";
+    import {mapGetters} from 'vuex';
     export default{
+        data(){
+            return{
+
+            }
+        },
+        computed:{
+            ...mapGetters([
+              'articles',
+              'funds'
+            ])
+        },
         components:{Stock}
     }
 </script>

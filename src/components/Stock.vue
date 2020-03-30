@@ -1,7 +1,7 @@
 <template>
     <div class="stock">
         <div class="title">
-            <h3>BMW</h3><small>(price:300)</small>
+            <h3>{{article.name}}</h3><small>(price:{{article.price}})</small>
         </div>
         <div class='submit-div'>
             <input type="number">
@@ -9,6 +9,21 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default{
+        props:['article'],
+        data(){
+            return{
+
+            }
+        },
+        mounted(){
+            console.log(this.article);
+        }
+      
+    }
+</script>
 
 <style scoped>
      *{
