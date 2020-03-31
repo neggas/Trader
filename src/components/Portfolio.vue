@@ -1,7 +1,7 @@
 <template>
     <div class="stock">
         <div class="title">
-            <h3>{{port.name}}</h3><small>(price:{{port.price}})</small>
+            <h3>{{port.name}}</h3><small>(price:{{port.price}}-{{port.time}})</small>
         </div>
         <div class='submit-div'>
             <input type="number">
@@ -11,8 +11,15 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
     export default {
-        props:['port']
+        props:['port'],
+        computed:{
+             ...mapGetters([
+               'funds',
+               'portfolioStock',
+           ]),
+        }
     }
 </script>
 

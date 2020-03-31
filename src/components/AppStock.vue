@@ -1,7 +1,7 @@
 <template>
     <div id="home">
         <div class="wrapper">
-            <Stock v-for="article in articles" :key="article.name" :article="article"></Stock>
+            <Stock v-for="article in articles" :key="article.id" :article="article"></Stock>
         </div>
     </div>
 </template>

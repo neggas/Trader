@@ -1,7 +1,7 @@
 <template>
     <div id="portfolio">
         <div class="wrapper">
-            <Portfolio v-for="portfolio in portfolioStock" :key="portfolio.name" :port="portfolio"></Portfolio>
+            <Portfolio v-for="portfolio in portfolioStock" :key="portfolio.id" :port="portfolio"></Portfolio>
         </div>
     </div>
 </template>
@@ -24,9 +24,6 @@
                'portfolioStock',
            ]),
         },
-        mounted(){
-            console.log(this.portfolioStock.length)
-        }
     }
 </script>
 

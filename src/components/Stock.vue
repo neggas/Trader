@@ -4,8 +4,8 @@
             <h3>{{article.name}}</h3><small>(price:{{article.price}})</small>
         </div>
         <div class='submit-div'>
-            <input type="number" placeholder="how many" v-model="times" :nombre="times">
-            <button @click="buy(article)">Buy</button>
+            <input type="number" placeholder="how many" v-model="nb_buy">
+            <button @click="buy(article)" :disabled="disableActive">buy</button>
         </div>
     </div>
 </template>
@@ -17,25 +17,36 @@
         props:['article'],
         data(){
             return{
-                disable:false,
-                nombre:0
+              nb_buy:'',
+              disableActive:false,
             }
         },
         methods:{
             ...mapMutations([
-                'buyArticle'
+                'buyArticle',
+                'setTimes'
             ]),
             buy(article){
-               const nombre = this.$store.state.times;
-               if(article.price*nombre <= this.funds){
 
-                   this.portfolioStock.push(article);
-                   this.buyArticle(article.price*nombre);
-                  
-               }
+                if(this.nb_buy*article.price <= this.funds && this.nb_buy > 0){
 
-                this.times = 0;
-               
+                    if(this.portfolioStock.length > 0){
+
+                        if(this.portfolioStock.includes(article)){
+                        article.time += parseInt(this.nb_buy);
+                        }else{
+                            article.time = parseInt(this.nb_buy);
+                            this.portfolioStock.push(article);
+                        }
+                    }else{
+                        article.time = parseInt(this.nb_buy);
+                        this.portfolioStock.push(article);
+                    }
+                    this.buyArticle(this.nb_buy*article.price)
+                    this.nb_buy = '';
+                }else{
+                    alert("invalide input");
+                }
             }
         },
         computed:{
@@ -43,16 +54,7 @@
            ...mapGetters([
                'funds',
                'portfolioStock',
-               'times'
            ]),
-            times:{
-                get(){
-                    return this.$store.times;
-                },
-                set(value){
-                    return this.$store.commit('getTimes',value);
-                }
-            }
         }
     }
 </script>
