@@ -1,7 +1,7 @@
 <template>
     <div class="stock">
         <div class="title">
-            <h3>BMW</h3><small>(price:300)</small>
+            <h3>{{port.name}}</h3><small>(price:{{port.price}})</small>
         </div>
         <div class='submit-div'>
             <input type="number">
@@ -9,6 +9,12 @@
         </div>
     </div>
 </template>
+
+<script>
+    export default {
+        props:['port']
+    }
+</script>
 
 <style scope scoped>
     *{

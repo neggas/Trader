@@ -4,26 +4,60 @@
             <h3>{{article.name}}</h3><small>(price:{{article.price}})</small>
         </div>
         <div class='submit-div'>
-            <input type="number">
-            <button>Buy</button>
+            <input type="number" placeholder="how many" v-model="times" :nombre="times">
+            <button @click="buy(article)">Buy</button>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapGetters,mapMutations} from 'vuex';
     export default{
+
         props:['article'],
         data(){
             return{
-
+                disable:false,
+                nombre:0
             }
         },
-        mounted(){
-            console.log(this.article);
+        methods:{
+            ...mapMutations([
+                'buyArticle'
+            ]),
+            buy(article){
+               const nombre = this.$store.state.times;
+               if(article.price*nombre <= this.funds){
+
+                   this.portfolioStock.push(article);
+                   this.buyArticle(article.price*nombre);
+                  
+               }
+
+                this.times = 0;
+               
+            }
+        },
+        computed:{
+           
+           ...mapGetters([
+               'funds',
+               'portfolioStock',
+               'times'
+           ]),
+            times:{
+                get(){
+                    return this.$store.times;
+                },
+                set(value){
+                    return this.$store.commit('getTimes',value);
+                }
+            }
         }
-      
     }
 </script>
+
+
 
 <style scoped>
      *{

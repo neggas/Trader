@@ -1,14 +1,16 @@
 <template>
     <div id="portfolio">
         <div class="wrapper">
-            <Portfolio></Portfolio>
+            <Portfolio v-for="portfolio in portfolioStock" :key="portfolio.name" :port="portfolio"></Portfolio>
         </div>
     </div>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     import Portfolio from './Portfolio'
     export default {
+       
         data(){
             return{
 
@@ -16,6 +18,14 @@
         },
         components:{
             Portfolio
+        },
+        computed:{
+             ...mapGetters([
+               'portfolioStock',
+           ]),
+        },
+        mounted(){
+            console.log(this.portfolioStock.length)
         }
     }
 </script>

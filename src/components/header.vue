@@ -28,12 +28,34 @@
                             <option>Load</option>
                         </select>
                     </li>
-                    <h4>Funds:10.000$</h4>
+                    <h4>{{funds|fundFormat}}</h4>
                 </ul>
            </div>
         </nav>
     </div>
 </template>
+
+<script>
+
+    import {mapGetters} from 'vuex';
+    export default {
+        data(){
+            return{
+
+            }
+        },
+        computed:{
+            ...mapGetters([
+                'funds'
+            ])
+        },
+        filters:{
+            fundFormat(value){
+                return value.toLocaleString() + "$"
+            }
+        }
+    }
+</script>
 
 
 

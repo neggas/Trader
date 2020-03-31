@@ -8,6 +8,8 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         funds: 10000,
+        times: 0,
+        portfolioStock: [],
         article: [
             { name: "BMW", price: 110 },
             { name: "Google", price: 200 },
@@ -15,9 +17,19 @@ export const store = new Vuex.Store({
             { name: "Tiwitter", price: 8 },
         ]
     },
+    mutations: {
+        getTimes: (state, times) => {
+            state.times = times;
+        },
+        buyArticle: (state, times) => {
+            return state.funds -= times;
+        }
+    },
     getters: {
         articles: state => state.article,
-        funds: state => state.funds
+        funds: state => state.funds,
+        times: state => state.times,
+        portfolioStock: state => state.portfolioStock
     }
 
 })
