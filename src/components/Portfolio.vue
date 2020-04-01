@@ -4,21 +4,48 @@
             <h3>{{port.name}}</h3><small>(price:{{port.price}}-{{port.time}})</small>
         </div>
         <div class='submit-div'>
-            <input type="number">
-            <button>Sell</button>
+            <input type="number" v-model="nb_buy">
+            <button @click="sell(port)">Sell</button>
         </div>
     </div>
 </template>
 
 <script>
-    import {mapGetters} from 'vuex';
+    import {mapGetters,mapMutations} from 'vuex';
     export default {
         props:['port'],
+        data(){
+            return{
+                nb_buy:'',
+            }
+        },
         computed:{
              ...mapGetters([
                'funds',
                'portfolioStock',
            ]),
+        },
+        methods:{
+            ...mapMutations([
+               'sellArticle'
+            ]),
+              sell(article){
+
+                if(this.nb_buy > 0 && this.nb_buy <= article.time){
+                    const nombRest = article.time-this.nb_buy
+                    this.sellArticle(this.nb_buy*article.price)
+                    this.nb_buy = '';
+
+                    if(nombRest === 0){
+                        this.portfolioStock.splice(this.portfolioStock.indexOf(article),1);
+                    }else{
+                        return article.time = nombRest
+                    }
+                    
+                }else{
+                    alert("invalide input");
+                }
+            }
         }
     }
 </script>

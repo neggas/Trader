@@ -22,10 +22,10 @@
                 <ul id="navbar-nav nav-right">
                     <li><button @click="endDay">End-Day</button></li>
                     <li>
-                        <select>
-                            <option disable="true">Save&Load</option>
-                            <option>Save</option>
-                            <option>Load</option>
+                        <select v-model="selected">
+                            <option disable value="">Save&Load</option>
+                            <option value="Save" @click="saveAndLoad"><button>Save</button></option>
+                            <option value="Load" @click="saveAndLoad"><button>Load</button></option>
                         </select>
                     </li>
                     <h4>{{funds|fundFormat}}</h4>
@@ -41,15 +41,15 @@
     export default {
         data(){
             return{
-
+                selected:'',
             }
         },
         
         computed:{
             ...mapGetters([
                 'funds',
-                'portfolioStock',
-                'articles'
+                'articles',
+                'savedArticle'
             ])
         },
         filters:{
@@ -59,14 +59,13 @@
         },
         methods:{
             ...mapMutations([
-                'endDay'
+                'endDay',
             ]),
 
             endDay(){
                 //on change le prix des article en ajoutant ou en retirant un pourcentage
-
                 let chances = [1,0];
-               this.articles.map((article)=>{
+                this.articles.map((article)=>{
                     let chanceIndex = Math.floor(Math.random()*chances.length);
                     let chance = chances[chanceIndex];
                     if(chance == 0){
@@ -77,8 +76,18 @@
                         return article.price += Math.floor(article.price*(pourcentage/100));
                     }
                    
-                   
                })
+            },
+            saveAndLoad(){
+                //ici on charge ou enregistre les donnes  en fonction de selected
+
+                if(this.selected === 'Save'){
+
+                    console.log(this.artcileSaved[0].price);
+                    console.log(this.articles[0].price);
+                }else{ 
+                    this.setArtice(this.artcileSaved);
+                }
             }
         }
     }

@@ -10,6 +10,7 @@ export const store = new Vuex.Store({
         funds: 10000,
         times: 0,
         portfolioStock: [],
+        savedArticle: [],
         article: [
             { id: 1, name: "BMW", price: 110, time: 0 },
             { id: 2, name: "Google", price: 200, time: 0 },
@@ -20,6 +21,7 @@ export const store = new Vuex.Store({
     mutations: {
         setTimes: (state, value) => state.times = value,
         buyArticle: (state, times) => state.funds -= times,
+        sellArticle: (state, price) => state.funds += price,
     },
     getters: {
         articles: state => state.article,
