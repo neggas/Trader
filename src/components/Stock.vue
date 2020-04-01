@@ -24,7 +24,8 @@
         methods:{
             ...mapMutations([
                 'buyArticle',
-                'setTimes'
+                'setTimes',
+                'endDay'
             ]),
             buy(article){
 

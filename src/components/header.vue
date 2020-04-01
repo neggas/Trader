@@ -20,7 +20,7 @@
            </div>
            <div id="right">
                 <ul id="navbar-nav nav-right">
-                    <li><button>End-Day</button></li>
+                    <li><button @click="endDay">End-Day</button></li>
                     <li>
                         <select>
                             <option disable="true">Save&Load</option>
@@ -37,21 +37,48 @@
 
 <script>
 
-    import {mapGetters} from 'vuex';
+    import {mapGetters,mapMutations} from 'vuex';
     export default {
         data(){
             return{
 
             }
         },
+        
         computed:{
             ...mapGetters([
-                'funds'
+                'funds',
+                'portfolioStock',
+                'articles'
             ])
         },
         filters:{
             fundFormat(value){
                 return value.toLocaleString() + "$"
+            }
+        },
+        methods:{
+            ...mapMutations([
+                'endDay'
+            ]),
+
+            endDay(){
+                //on change le prix des article en ajoutant ou en retirant un pourcentage
+
+                let chances = [1,0];
+               this.articles.map((article)=>{
+                    let chanceIndex = Math.floor(Math.random()*chances.length);
+                    let chance = chances[chanceIndex];
+                    if(chance == 0){
+                        let pourcentage = Math.floor(Math.random()*50)
+                        return article.price -= Math.floor(article.price*(pourcentage/100));
+                    }else{
+                        let pourcentage = Math.floor(Math.random()*50)
+                        return article.price += Math.floor(article.price*(pourcentage/100));
+                    }
+                   
+                   
+               })
             }
         }
     }
