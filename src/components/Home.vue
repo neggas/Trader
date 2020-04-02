@@ -6,10 +6,31 @@
             <h4>You may save and load your data</h4>
             <h4>Click begin to begin another day</h4>
 
-            <h2 id="funds">Funds:10.000$</h2>
+            <h2 id="funds">{{this.funds|fundFormat}}</h2>
         </div>
     </div>
 </template>
+
+<script>
+    import {mapGetters} from 'vuex'
+    export default {
+        data(){
+            return{
+
+            }
+        },
+        filters:{
+            fundFormat(value){
+                return value.toLocaleString() + "$"
+            }
+        },
+        computed:{
+             ...mapGetters([
+               'funds',
+           ]),
+        }
+    }
+</script>
 
 <style scoped>
     *{

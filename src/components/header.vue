@@ -42,6 +42,7 @@
         data(){
             return{
                 selected:'',
+                saveArticle:[],
             }
         },
         
@@ -60,6 +61,7 @@
         methods:{
             ...mapMutations([
                 'endDay',
+                'setArticle'
             ]),
 
             endDay(){
@@ -82,11 +84,12 @@
                 //ici on charge ou enregistre les donnes  en fonction de selected
 
                 if(this.selected === 'Save'){
-
-                    console.log(this.artcileSaved[0].price);
-                    console.log(this.articles[0].price);
+                  
+                  return localStorage.setItem('data',JSON.stringify(this.articles));
+                 
                 }else{ 
-                    this.setArtice(this.artcileSaved);
+                    this.saveArticle = JSON.parse(localStorage.getItem('data'));
+                    this.setArticle(this.saveArticle);
                 }
             }
         }

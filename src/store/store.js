@@ -22,6 +22,7 @@ export const store = new Vuex.Store({
         setTimes: (state, value) => state.times = value,
         buyArticle: (state, times) => state.funds -= times,
         sellArticle: (state, price) => state.funds += price,
+        setArticle: (state, value) => state.article = value
     },
     getters: {
         articles: state => state.article,

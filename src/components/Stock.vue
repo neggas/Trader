@@ -5,7 +5,10 @@
         </div>
         <div class='submit-div'>
             <input type="number" placeholder="how many" v-model="nb_buy">
-            <button @click="buy(article)" :disabled="disableActive">buy</button>
+            <button 
+                @click="buy(article)" 
+                :disabled="disableActive" 
+                :class="{wrong:disableActive}">buy</button>
         </div>
     </div>
 </template>
@@ -18,7 +21,7 @@
         data(){
             return{
               nb_buy:'',
-              disableActive:false,
+              active:false
             }
         },
         methods:{
@@ -56,6 +59,16 @@
                'funds',
                'portfolioStock',
            ]),
+
+           disableActive(){
+              
+              if(this.nb_buy <= 0 || this.nb_buy == ''){
+                  return !this.active;
+              }else{
+                  return this.active;
+              }
+           }
+          
         }
     }
 </script>
@@ -68,6 +81,8 @@
         margin:0;
         box-sizing:border-box;
     }
+
+   
 
     .stock{
         margin-left:80px;
@@ -112,6 +127,11 @@
         padding-right:10px;
         box-shadow:1px 1px 1px black;
         cursor:pointer;
+    }
+
+     button.wrong{
+        border:1px solid rgb(221, 12, 12);
+        background-color: #e23f47;
     }
 
     .submit-div input[type="number"]{
